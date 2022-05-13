@@ -30,7 +30,7 @@ library SafeMath {
     /**
      * @dev Returns the subtraction of two unsigned integers, with an overflow flag.
      *
-     * _Available since v3.4._one
+     * _Available since v3.4._one tow
      */
     function trySub(uint256 a, uint256 b) internal pure returns (bool, uint256) {
         unchecked {
