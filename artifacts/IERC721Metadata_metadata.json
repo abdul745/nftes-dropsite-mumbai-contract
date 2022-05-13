@@ -1,0 +1,81 @@
+{
+	"compiler": {
+		"version": "0.8.7+commit.e28d00a7"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [
+			{
+				"inputs": [],
+				"name": "name",
+				"outputs": [
+					{
+						"internalType": "string",
+						"name": "",
+						"type": "string"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "symbol",
+				"outputs": [
+					{
+						"internalType": "string",
+						"name": "",
+						"type": "string"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			}
+		],
+		"devdoc": {
+			"details": "See https://eips.ethereum.org/EIPS/eip-721",
+			"kind": "dev",
+			"methods": {
+				"name()": {
+					"details": "Returns the token collection name."
+				},
+				"symbol()": {
+					"details": "Returns the token collection symbol."
+				}
+			},
+			"title": "ERC-721 Non-Fungible Token Standard, optional metadata extension",
+			"version": 1
+		},
+		"userdoc": {
+			"kind": "user",
+			"methods": {},
+			"version": 1
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"ERC721.sol": "IERC721Metadata"
+		},
+		"evmVersion": "london",
+		"libraries": {},
+		"metadata": {
+			"bytecodeHash": "ipfs"
+		},
+		"optimizer": {
+			"enabled": false,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"ERC721.sol": {
+			"keccak256": "0x29134b53a15b428d965607af3c6b2b6d76155bb9b8beb78d63b16948c09ae7b3",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://8b277e1c740432ea1229b3502e9722643ac98e26895dcf064a5449d3a5f6d4f3",
+				"dweb:/ipfs/QmWei9zfXT8SSCGMtAmC662a25oCrFHiCi9una5vZiQ56H"
+			]
+		}
+	},
+	"version": 1
+}

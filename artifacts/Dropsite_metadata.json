@@ -1,0 +1,377 @@
+{
+	"compiler": {
+		"version": "0.8.7+commit.e28d00a7"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [
+			{
+				"inputs": [
+					{
+						"internalType": "string",
+						"name": "name",
+						"type": "string"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "constructor"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "operator",
+						"type": "address"
+					},
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "from",
+						"type": "address"
+					},
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "to",
+						"type": "address"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "id",
+						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "value",
+						"type": "uint256"
+					}
+				],
+				"name": "TransferSingle",
+				"type": "event"
+			},
+			{
+				"inputs": [],
+				"name": "ContractBalance",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "user_addr",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "noOfMints",
+						"type": "uint256"
+					}
+				],
+				"name": "CryptoRandomMint",
+				"outputs": [
+					{
+						"internalType": "uint256[]",
+						"name": "",
+						"type": "uint256[]"
+					}
+				],
+				"stateMutability": "payable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "user_addr",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "noOfMints",
+						"type": "uint256"
+					}
+				],
+				"name": "FiatRandomMint",
+				"outputs": [
+					{
+						"internalType": "uint256[]",
+						"name": "",
+						"type": "uint256[]"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "IsPaused",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "Owner",
+				"outputs": [
+					{
+						"internalType": "address payable",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "checkMintedCategoryWise",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "checkTotalMinted",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "getMintFee",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "openDropsite",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "user_addr",
+						"type": "address"
+					}
+				],
+				"name": "randomMinting",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					},
+					{
+						"internalType": "string",
+						"name": "",
+						"type": "string"
+					}
+				],
+				"stateMutability": "payable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "addr",
+						"type": "address"
+					}
+				],
+				"name": "returnOwner",
+				"outputs": [
+					{
+						"internalType": "uint256[]",
+						"name": "",
+						"type": "uint256[]"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "_mintFee",
+						"type": "uint256"
+					}
+				],
+				"name": "setMintFee",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "stopDropsite",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address payable",
+						"name": "to",
+						"type": "address"
+					}
+				],
+				"name": "withDraw",
+				"outputs": [],
+				"stateMutability": "payable",
+				"type": "function"
+			}
+		],
+		"devdoc": {
+			"kind": "dev",
+			"methods": {},
+			"version": 1
+		},
+		"userdoc": {
+			"kind": "user",
+			"methods": {},
+			"version": 1
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"Dropsite.sol": "Dropsite"
+		},
+		"evmVersion": "london",
+		"libraries": {},
+		"metadata": {
+			"bytecodeHash": "ipfs"
+		},
+		"optimizer": {
+			"enabled": false,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"Address.sol": {
+			"keccak256": "0x319d92b11370e4d8d67b46b5e3c9440780e7ab534900dda6c4d50df6c281c67f",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://5f422b0f947eb48dc5a9ae8aaf16bdbf038dfddf3ae84af9e68b928802b83d85",
+				"dweb:/ipfs/QmZeYZ6wN1W3h4R5X3s3bj4zMrxgs3aay5fsvCLa1AaWHx"
+			]
+		},
+		"Context.sol": {
+			"keccak256": "0xb1f2346e979ad24141da4cb0466bd1ec05ad3d823e806deaf9fff9ad7ef24fb3",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://515e9c2dcf6643fdee022160ba0f3d0146db9a335ae3a5387449c724074c8515",
+				"dweb:/ipfs/QmT2hrjXKFroYhu3jtfU3Fi6n8W6mTsFsDoxgU9G7vdUo4"
+			]
+		},
+		"Dropsite.sol": {
+			"keccak256": "0x9ec4f9e18205028c7165f2f71c385cc355eb147d71a25c3271abe10f32bbab55",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://9fb5c5ec52482a30db5bd080c9df2433715076e8649c946675b68c9bde386aa3",
+				"dweb:/ipfs/QmdDgwfQdzKuPjN4AHCcj6EUpx3Rbhff5qpGVAbC1V7oRb"
+			]
+		},
+		"ERC1155_Dropsite.sol": {
+			"keccak256": "0x5dfb07a5226b29aa22b048f5c22ba440e8a2d96bf9222fdcba0a5790fd983149",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://063b8817b7265760276c67a1b98420b973f8d871106f5dff958e0604c28a6c96",
+				"dweb:/ipfs/QmQgPUje4qFjR1ZbJT6YnYAy6yKms8xi2FP4kBFLuz86Zp"
+			]
+		},
+		"ERC165_Dropsite.sol": {
+			"keccak256": "0xac4083993fda4e1dbd53bdbfb56b46abcd5b93f2851db7e17b992aecedfb3eb7",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://db96c5f138bfc20039a9a4a0074c58bb2482a5daabf8046520bc0541703f8de7",
+				"dweb:/ipfs/QmVfWJ9999FnUAoLcVvvufBuMFfS1P72b71CBcBGC5jPUw"
+			]
+		},
+		"IERC1155Receiver_Dropsite.sol": {
+			"keccak256": "0xe4f9e905983017b16f15bd27921ef2532aaff6e3acbada60864446f37d17c878",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://26d2f4104be37d39ab9bb89efe463b49cf4e587111a22c4962a1c612cd0f7c00",
+				"dweb:/ipfs/QmY356PjomTD3w8xVT6tC59CyZ8fixhxCusVnMnAb98fTq"
+			]
+		},
+		"IERC1155_Dropsite.sol": {
+			"keccak256": "0xadf886d9147e0bed64e31a2d7e07bdaa5e5f12aa8d671727c44b958c7f406dc3",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://8ce9838c1c9bb383c55192e0a2be3db3399701e5fe4b539df371a26e0e6751bd",
+				"dweb:/ipfs/QmWvHb9V2WRZcATTtDuMWdWU4iQ1vkuXd6XxZwTWHDYhbe"
+			]
+		},
+		"IERC165_Dropsite.sol": {
+			"keccak256": "0x80b1b785b4a630bb16e4d9874f4e4546c35e8c94877bb4a2a30730d3b254b87c",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://f679d3a8c9210da1ec4e4dc28e4ecbad6225dff4e5667a18eb76ff0601f55ada",
+				"dweb:/ipfs/QmezejwTuLL7MhMv5Yosrpz4aYa5AidU8sqb3iBBP68CKb"
+			]
+		},
+		"Strings.sol": {
+			"keccak256": "0x9b07ef0960de9137c24d6b8f1c6dab797b2c3a1503d8120900fe1cd662c5d46a",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://d52e859a9d10dfeda997d2d2d64e4ff824053adf96e016062c1c4249975180ba",
+				"dweb:/ipfs/QmSzMC9dpXpD83GXyVU84zYqSDu88RteVEKuqa3N8wTLKW"
+			]
+		}
+	},
+	"version": 1
+}

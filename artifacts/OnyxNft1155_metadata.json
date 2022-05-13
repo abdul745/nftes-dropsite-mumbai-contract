@@ -1,0 +1,1030 @@
+{
+	"compiler": {
+		"version": "0.8.7+commit.e28d00a7"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [
+			{
+				"inputs": [
+					{
+						"internalType": "string",
+						"name": "name",
+						"type": "string"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "constructor"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "account",
+						"type": "address"
+					},
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "operator",
+						"type": "address"
+					},
+					{
+						"indexed": false,
+						"internalType": "bool",
+						"name": "approved",
+						"type": "bool"
+					}
+				],
+				"name": "ApprovalForAll",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"name": "RoyaltiesTransfer",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "operator",
+						"type": "address"
+					},
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "from",
+						"type": "address"
+					},
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "to",
+						"type": "address"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256[]",
+						"name": "ids",
+						"type": "uint256[]"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256[]",
+						"name": "values",
+						"type": "uint256[]"
+					}
+				],
+				"name": "TransferBatch",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "operator",
+						"type": "address"
+					},
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "from",
+						"type": "address"
+					},
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "to",
+						"type": "address"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "id",
+						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "value",
+						"type": "uint256"
+					}
+				],
+				"name": "TransferSingle",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": false,
+						"internalType": "string",
+						"name": "value",
+						"type": "string"
+					},
+					{
+						"indexed": true,
+						"internalType": "uint256",
+						"name": "id",
+						"type": "uint256"
+					}
+				],
+				"name": "URI",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"internalType": "string",
+						"name": "",
+						"type": "string"
+					}
+				],
+				"name": "availableForBids",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"internalType": "string",
+						"name": "",
+						"type": "string"
+					}
+				],
+				"name": "removeFormSale",
+				"type": "event"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "owner",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "id",
+						"type": "uint256"
+					}
+				],
+				"name": "CheckNftPrice",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "nftOwner",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "nftId",
+						"type": "uint256"
+					}
+				],
+				"name": "CheckNftStatus",
+				"outputs": [
+					{
+						"internalType": "enum OnyxNft1155Auction.status",
+						"name": "",
+						"type": "uint8"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "ContractBalance",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "CurrentStatus",
+				"outputs": [
+					{
+						"internalType": "enum OnyxNft1155Auction.status",
+						"name": "",
+						"type": "uint8"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "Add",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "id",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "Amount",
+						"type": "uint256"
+					},
+					{
+						"internalType": "bytes",
+						"name": "data",
+						"type": "bytes"
+					}
+				],
+				"name": "IncrementInExistingTokens",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "IsPaused",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "to",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "id",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "amount",
+						"type": "uint256"
+					},
+					{
+						"internalType": "bytes",
+						"name": "data",
+						"type": "bytes"
+					},
+					{
+						"internalType": "string",
+						"name": "tokenURI",
+						"type": "string"
+					},
+					{
+						"internalType": "uint256",
+						"name": "NftPrice",
+						"type": "uint256"
+					},
+					{
+						"internalType": "address payable",
+						"name": "MinterAddress",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "RoyaltyValueOfMinter",
+						"type": "uint256"
+					}
+				],
+				"name": "LocalMintedNfts",
+				"outputs": [],
+				"stateMutability": "payable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "to",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256[]",
+						"name": "ids",
+						"type": "uint256[]"
+					},
+					{
+						"internalType": "uint256[]",
+						"name": "amounts",
+						"type": "uint256[]"
+					},
+					{
+						"internalType": "string[]",
+						"name": "TokenUriArr",
+						"type": "string[]"
+					},
+					{
+						"internalType": "bytes",
+						"name": "data",
+						"type": "bytes"
+					},
+					{
+						"internalType": "uint256[]",
+						"name": "RoyaltyValue",
+						"type": "uint256[]"
+					}
+				],
+				"name": "MintBatch",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "Owner",
+				"outputs": [
+					{
+						"internalType": "address payable",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "SwitchSaleState",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "id",
+						"type": "uint256"
+					}
+				],
+				"name": "TokenUri",
+				"outputs": [
+					{
+						"internalType": "string",
+						"name": "",
+						"type": "string"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "Price",
+						"type": "uint256"
+					}
+				],
+				"name": "_deductOnyxNftFee",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "pure",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "nftId",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "index",
+						"type": "uint256"
+					}
+				],
+				"name": "acceptBids",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "nftOwner",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "nftId",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "bidAmount",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "numOfCopies",
+						"type": "uint256"
+					}
+				],
+				"name": "addBid",
+				"outputs": [],
+				"stateMutability": "payable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "account",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "id",
+						"type": "uint256"
+					}
+				],
+				"name": "balanceOf",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address[]",
+						"name": "accounts",
+						"type": "address[]"
+					},
+					{
+						"internalType": "uint256[]",
+						"name": "ids",
+						"type": "uint256[]"
+					}
+				],
+				"name": "balanceOfBatch",
+				"outputs": [
+					{
+						"internalType": "uint256[]",
+						"name": "",
+						"type": "uint256[]"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "account",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "id",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "value",
+						"type": "uint256"
+					}
+				],
+				"name": "burn",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "account",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256[]",
+						"name": "ids",
+						"type": "uint256[]"
+					},
+					{
+						"internalType": "uint256[]",
+						"name": "values",
+						"type": "uint256[]"
+					}
+				],
+				"name": "burnBatch",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "t_id",
+						"type": "uint256"
+					}
+				],
+				"name": "checkFirstMinter",
+				"outputs": [
+					{
+						"components": [
+							{
+								"internalType": "address payable",
+								"name": "recipient",
+								"type": "address"
+							},
+							{
+								"internalType": "uint24",
+								"name": "amount",
+								"type": "uint24"
+							}
+						],
+						"internalType": "struct OnyxNftErc20.royaltyInfo",
+						"name": "",
+						"type": "tuple"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "account",
+						"type": "address"
+					},
+					{
+						"internalType": "address",
+						"name": "operator",
+						"type": "address"
+					}
+				],
+				"name": "isApprovedForAll",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "nftId",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "amount",
+						"type": "uint256"
+					},
+					{
+						"internalType": "bytes",
+						"name": "data",
+						"type": "bytes"
+					},
+					{
+						"internalType": "string",
+						"name": "tokenURI",
+						"type": "string"
+					},
+					{
+						"internalType": "uint256",
+						"name": "RoyaltyValueOfMinter",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "fixPriceOfNft",
+						"type": "uint256"
+					}
+				],
+				"name": "mintForFixedPrice",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "nftId",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "amount",
+						"type": "uint256"
+					},
+					{
+						"internalType": "bytes",
+						"name": "data",
+						"type": "bytes"
+					},
+					{
+						"internalType": "string",
+						"name": "tokenURI",
+						"type": "string"
+					},
+					{
+						"internalType": "uint256",
+						"name": "RoyaltyValueOfMinter",
+						"type": "uint256"
+					}
+				],
+				"name": "mintForOpenBidding",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "nftId",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "fixPriceOfNft",
+						"type": "uint256"
+					}
+				],
+				"name": "placeNftForFixedAmount",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "nftId",
+						"type": "uint256"
+					}
+				],
+				"name": "placeNftForOpenBidding",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "from",
+						"type": "address"
+					},
+					{
+						"internalType": "address",
+						"name": "to",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "nftId",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "amountOfNft",
+						"type": "uint256"
+					}
+				],
+				"name": "purchaseAgainstFixedPrice",
+				"outputs": [],
+				"stateMutability": "payable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "nftId",
+						"type": "uint256"
+					}
+				],
+				"name": "removeFromSale",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "operator",
+						"type": "address"
+					},
+					{
+						"internalType": "bool",
+						"name": "approved",
+						"type": "bool"
+					}
+				],
+				"name": "setApprovalForAll",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "nftId",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "amount",
+						"type": "uint256"
+					},
+					{
+						"internalType": "bytes",
+						"name": "data",
+						"type": "bytes"
+					},
+					{
+						"internalType": "string",
+						"name": "tokenURI",
+						"type": "string"
+					},
+					{
+						"internalType": "uint256",
+						"name": "RoyaltyValueOfMinter",
+						"type": "uint256"
+					}
+				],
+				"name": "simpleMint",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "bytes4",
+						"name": "interfaceId",
+						"type": "bytes4"
+					}
+				],
+				"name": "supportsInterface",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address payable",
+						"name": "to",
+						"type": "address"
+					}
+				],
+				"name": "withDraw",
+				"outputs": [],
+				"stateMutability": "payable",
+				"type": "function"
+			}
+		],
+		"devdoc": {
+			"kind": "dev",
+			"methods": {
+				"balanceOf(address,uint256)": {
+					"details": "See {IERC1155-balanceOf}. Requirements: - `account` cannot be the zero address."
+				},
+				"balanceOfBatch(address[],uint256[])": {
+					"details": "See {IERC1155-balanceOfBatch}. Requirements: - `accounts` and `ids` must have the same length."
+				},
+				"isApprovedForAll(address,address)": {
+					"details": "See {IERC1155-isApprovedForAll}."
+				},
+				"setApprovalForAll(address,bool)": {
+					"details": "See {IERC1155-setApprovalForAll}."
+				},
+				"supportsInterface(bytes4)": {
+					"details": "See {IERC165-supportsInterface}."
+				}
+			},
+			"version": 1
+		},
+		"userdoc": {
+			"kind": "user",
+			"methods": {},
+			"version": 1
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"OnyxNft1155.sol": "OnyxNft1155"
+		},
+		"evmVersion": "london",
+		"libraries": {},
+		"metadata": {
+			"bytecodeHash": "ipfs"
+		},
+		"optimizer": {
+			"enabled": true,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"@openzeppelin/contracts/utils/Counters.sol": {
+			"keccak256": "0xf0018c2440fbe238dd3a8732fa8e17a0f9dce84d31451dc8a32f6d62b349c9f1",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://59e1c62884d55b70f3ae5432b44bb3166ad71ae3acd19c57ab6ddc3c87c325ee",
+				"dweb:/ipfs/QmezuXg5GK5oeA4F91EZhozBFekhq5TD966bHPH18cCqhu"
+			]
+		},
+		"Address.sol": {
+			"keccak256": "0x319d92b11370e4d8d67b46b5e3c9440780e7ab534900dda6c4d50df6c281c67f",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://5f422b0f947eb48dc5a9ae8aaf16bdbf038dfddf3ae84af9e68b928802b83d85",
+				"dweb:/ipfs/QmZeYZ6wN1W3h4R5X3s3bj4zMrxgs3aay5fsvCLa1AaWHx"
+			]
+		},
+		"Context.sol": {
+			"keccak256": "0xb1f2346e979ad24141da4cb0466bd1ec05ad3d823e806deaf9fff9ad7ef24fb3",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://515e9c2dcf6643fdee022160ba0f3d0146db9a335ae3a5387449c724074c8515",
+				"dweb:/ipfs/QmT2hrjXKFroYhu3jtfU3Fi6n8W6mTsFsDoxgU9G7vdUo4"
+			]
+		},
+		"ERC1155.sol": {
+			"keccak256": "0x31f8bc91c81a75610da8b7d241fca7fbe49d0ec717f2c9a7e4e772b176e5e99d",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://fd0f75046955c35d1f9391dea268bc26e1932953ddbac37df509a3c29b6aea13",
+				"dweb:/ipfs/QmXKeAYA11csdhiw1x8gh4fVUUAqxW5xmzfCYxHCucfL5d"
+			]
+		},
+		"ERC1155Burnable.sol": {
+			"keccak256": "0x8f0eaf8d0d8ab25da29572257231e55dadf6ade602a27f12c643eec3cac3b5d4",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://e49eb05bd8deac6529db5275052762fce41b3a26f16fe05220b27b1710885808",
+				"dweb:/ipfs/QmYGFhSJrSuasrFGVPSCNrdqePkfEfe5LSK5wRWZLfYGnW"
+			]
+		},
+		"ERC165.sol": {
+			"keccak256": "0xe751fcd285f3b8b713799541ea1e2d0b48b0198d45623dc1fc25831b56be68ef",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://34bf15989ff2a2efa214e77e2313a6ad9cbbd7e797d21bf3b212979d3309c11d",
+				"dweb:/ipfs/QmXv6148okWDDQo6y7tb3LWby2GNw7VaLxg2ZrWGzTV8iH"
+			]
+		},
+		"IERC1155.sol": {
+			"keccak256": "0xc53a8423558d8ba0c7a045817f303a44bab2b4f045c721ea87b3f5a143971946",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://351168dc79e1f501f698e70ca332a8e21919f159d95bbaffa4dddea8f96abd13",
+				"dweb:/ipfs/QmePSWuuhPVNQBhH8ggQpJNixDfTQEAaECFsGsCX6wjGe2"
+			]
+		},
+		"IERC1155Receiver.sol": {
+			"keccak256": "0x2a6bfb6eaf43d552e6c0e742847cef2713c15a0c83662fef44f0bf58288fd322",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://8761567f19649eb5b6cf1ca47cfbde2f98679816fdcc9dc3c6c218b464aec142",
+				"dweb:/ipfs/QmdEvVSSSGyHaxwZKnbFqEqyqJ7eKDpSG4FzjG5DeRCCGm"
+			]
+		},
+		"IERC165.sol": {
+			"keccak256": "0xe12b17fbc259a75f7ab3a457c41490562b33f07a3a9b86cb435f1e5ad0666c3d",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://462d3965ab38215e3400b980cda44e0178b73141d90403e305484a8ba0d7cc9e",
+				"dweb:/ipfs/QmeRJoQMh2pWgKsFzX8SkPfpvrZcuRfwXtTWA8hf8VURK9"
+			]
+		},
+		"IERC721.sol": {
+			"keccak256": "0x2a9f0212fff1f46561d854379056bb47285a24fa607c3533d0d03e7742c88094",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://606ddd8ce5ed9cc98a4a0183e73be8854352feeb8677b8503af39180cab3a473",
+				"dweb:/ipfs/Qmerce8MaMegKttksWcZcMyGq6EiYrK7ZRBNeWeP4dB6MU"
+			]
+		},
+		"OnyxNft1155.sol": {
+			"keccak256": "0x77a539a71298dfd054165797d059671feddd674ef443d727c3b637f49faa67fa",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://215d416690e587ceadb77b2bf281ecb1f0167a6d3c52da24f76e7f026d4a3cb8",
+				"dweb:/ipfs/QmVSng3PGNFckYy5ixLM2uDB21giKLpEJFk4CKT5sr7dE9"
+			]
+		},
+		"OnyxNft1155Auctions.sol": {
+			"keccak256": "0x9ee13388664f86c6026dab541f0d9dfdaff53622081ebfe2d1e9c07c3a99b2b2",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://f10fc7133c21d37836b7abe071c161f760bfb591df625f071d3a1f820042ffbb",
+				"dweb:/ipfs/QmNhQfnLqWHkJGnvLXsFub7L1Z7pj7PDnVJfaeWu5k44n9"
+			]
+		},
+		"OnyxNft1155Royalties.sol": {
+			"keccak256": "0xeec794cb546dc7546deb5b39e4b9bf9df69d1f755cc3debf80a95762d5ec1d36",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://e9c6c906532cf1a6ef029b41d98613f12209ae0a746cf5b26d5cbd2c59546cb6",
+				"dweb:/ipfs/QmSrgHGk811mkkvYUMoH1P7Pu9BRVUsiRR8K8KsRFE79oh"
+			]
+		}
+	},
+	"version": 1
+}

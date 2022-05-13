@@ -1,0 +1,87 @@
+{
+	"compiler": {
+		"version": "0.8.7+commit.e28d00a7"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "_tokenId",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "_value",
+						"type": "uint256"
+					}
+				],
+				"name": "royaltyInfo",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "_receiver",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "_royaltyAmount",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			}
+		],
+		"devdoc": {
+			"details": "This is a contract used to add ERC2981 support to ERC721 and 1155",
+			"kind": "dev",
+			"methods": {
+				"royaltyInfo(uint256,uint256)": {
+					"params": {
+						"_tokenId": "- the NFT asset queried for royalty information",
+						"_value": "- the sale price of the NFT asset specified by _tokenId"
+					},
+					"returns": {
+						"_receiver": "- address of who should be sent the royalty payment",
+						"_royaltyAmount": "- the royalty payment amount for value sale price"
+					}
+				}
+			},
+			"version": 1
+		},
+		"userdoc": {
+			"kind": "user",
+			"methods": {},
+			"version": 1
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"ERC721.sol": "ERC2981Base"
+		},
+		"evmVersion": "london",
+		"libraries": {},
+		"metadata": {
+			"bytecodeHash": "ipfs"
+		},
+		"optimizer": {
+			"enabled": false,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"ERC721.sol": {
+			"keccak256": "0x29134b53a15b428d965607af3c6b2b6d76155bb9b8beb78d63b16948c09ae7b3",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://8b277e1c740432ea1229b3502e9722643ac98e26895dcf064a5449d3a5f6d4f3",
+				"dweb:/ipfs/QmWei9zfXT8SSCGMtAmC662a25oCrFHiCi9una5vZiQ56H"
+			]
+		}
+	},
+	"version": 1
+}

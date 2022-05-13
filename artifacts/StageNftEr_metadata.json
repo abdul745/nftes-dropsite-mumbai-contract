@@ -1,0 +1,71 @@
+{
+	"compiler": {
+		"version": "0.8.7+commit.e28d00a7"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"name": "RoyaltiesTransfer",
+				"type": "event"
+			}
+		],
+		"devdoc": {
+			"kind": "dev",
+			"methods": {},
+			"version": 1
+		},
+		"userdoc": {
+			"kind": "user",
+			"methods": {},
+			"version": 1
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"contracts/Space1155/StageNft1155Royalties.sol": "StageNftEr"
+		},
+		"evmVersion": "london",
+		"libraries": {},
+		"metadata": {
+			"bytecodeHash": "ipfs"
+		},
+		"optimizer": {
+			"enabled": true,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"contracts/Space1155/StageNft1155Royalties.sol": {
+			"keccak256": "0x29b28afd90ddb6b4e8d22835c650ceabae8457e908394361e23f3ce052bd1d3f",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://df75edcb44d9a69fb40bf89fe40f4002361471615b129be5f2f7683537f84e4e",
+				"dweb:/ipfs/QmfDPBiwDkD9mquCU9Tr3o2sVHFfe2Gcq4sXqLBR8Fq31Q"
+			]
+		}
+	},
+	"version": 1
+}

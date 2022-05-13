@@ -1,0 +1,97 @@
+{
+	"compiler": {
+		"version": "0.8.7+commit.e28d00a7"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "operator",
+						"type": "address"
+					},
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "from",
+						"type": "address"
+					},
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "to",
+						"type": "address"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "id",
+						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "value",
+						"type": "uint256"
+					}
+				],
+				"name": "TransferSingle",
+				"type": "event"
+			}
+		],
+		"devdoc": {
+			"details": "Required interface of an ERC1155 compliant contract, as defined in the https://eips.ethereum.org/EIPS/eip-1155[EIP]. _Available since v3.1._",
+			"events": {
+				"TransferSingle(address,address,address,uint256,uint256)": {
+					"details": "Emitted when `value` tokens of token type `id` are transferred from `from` to `to` by `operator`."
+				}
+			},
+			"kind": "dev",
+			"methods": {},
+			"version": 1
+		},
+		"userdoc": {
+			"kind": "user",
+			"methods": {},
+			"version": 1
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"IERC1155_Dropsite.sol": "IERC1155_Dropsite"
+		},
+		"evmVersion": "london",
+		"libraries": {},
+		"metadata": {
+			"bytecodeHash": "ipfs"
+		},
+		"optimizer": {
+			"enabled": false,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"IERC1155_Dropsite.sol": {
+			"keccak256": "0xadf886d9147e0bed64e31a2d7e07bdaa5e5f12aa8d671727c44b958c7f406dc3",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://8ce9838c1c9bb383c55192e0a2be3db3399701e5fe4b539df371a26e0e6751bd",
+				"dweb:/ipfs/QmWvHb9V2WRZcATTtDuMWdWU4iQ1vkuXd6XxZwTWHDYhbe"
+			]
+		},
+		"IERC165_Dropsite.sol": {
+			"keccak256": "0x80b1b785b4a630bb16e4d9874f4e4546c35e8c94877bb4a2a30730d3b254b87c",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://f679d3a8c9210da1ec4e4dc28e4ecbad6225dff4e5667a18eb76ff0601f55ada",
+				"dweb:/ipfs/QmezejwTuLL7MhMv5Yosrpz4aYa5AidU8sqb3iBBP68CKb"
+			]
+		}
+	},
+	"version": 1
+}

@@ -1,0 +1,46 @@
+{
+	"compiler": {
+		"version": "0.8.7+commit.e28d00a7"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [],
+		"devdoc": {
+			"details": "String operations.;",
+			"kind": "dev",
+			"methods": {},
+			"version": 1
+		},
+		"userdoc": {
+			"kind": "user",
+			"methods": {},
+			"version": 1
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"NFTES_Drop_flat.sol": "Strings"
+		},
+		"evmVersion": "london",
+		"libraries": {},
+		"metadata": {
+			"bytecodeHash": "ipfs"
+		},
+		"optimizer": {
+			"enabled": false,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"NFTES_Drop_flat.sol": {
+			"keccak256": "0x06e2d9d7ca2cea524bcab323bc55f1553d1165ec058b397606df0cc2f5afdaa8",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://e965d2f47f56b64eb7d8f2ef31e5de1074a534ebdae449d7a8c5308a3be3ee3e",
+				"dweb:/ipfs/QmPwi9wd7Ld4RkYzmQLXkEXLwDAbezGxks3Cc8ye6BZAb5"
+			]
+		}
+	},
+	"version": 1
+}

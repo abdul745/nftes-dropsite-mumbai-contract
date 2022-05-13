@@ -1,0 +1,534 @@
+{
+	"compiler": {
+		"version": "0.8.7+commit.e28d00a7"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "account",
+						"type": "address"
+					},
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "operator",
+						"type": "address"
+					},
+					{
+						"indexed": false,
+						"internalType": "bool",
+						"name": "approved",
+						"type": "bool"
+					}
+				],
+				"name": "ApprovalForAll",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"name": "RoyaltiesTransfer",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "operator",
+						"type": "address"
+					},
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "from",
+						"type": "address"
+					},
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "to",
+						"type": "address"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256[]",
+						"name": "ids",
+						"type": "uint256[]"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256[]",
+						"name": "values",
+						"type": "uint256[]"
+					}
+				],
+				"name": "TransferBatch",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "operator",
+						"type": "address"
+					},
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "from",
+						"type": "address"
+					},
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "to",
+						"type": "address"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "id",
+						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "value",
+						"type": "uint256"
+					}
+				],
+				"name": "TransferSingle",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": false,
+						"internalType": "string",
+						"name": "value",
+						"type": "string"
+					},
+					{
+						"indexed": true,
+						"internalType": "uint256",
+						"name": "id",
+						"type": "uint256"
+					}
+				],
+				"name": "URI",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"internalType": "string",
+						"name": "",
+						"type": "string"
+					}
+				],
+				"name": "availableForBids",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"internalType": "string",
+						"name": "",
+						"type": "string"
+					}
+				],
+				"name": "removeFormSale",
+				"type": "event"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "nftOwner",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "nftId",
+						"type": "uint256"
+					}
+				],
+				"name": "CheckNftStatus",
+				"outputs": [
+					{
+						"internalType": "enum OnyxNft1155Auction.status",
+						"name": "",
+						"type": "uint8"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "CurrentStatus",
+				"outputs": [
+					{
+						"internalType": "enum OnyxNft1155Auction.status",
+						"name": "",
+						"type": "uint8"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "Price",
+						"type": "uint256"
+					}
+				],
+				"name": "_deductOnyxNftFee",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "pure",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "account",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "id",
+						"type": "uint256"
+					}
+				],
+				"name": "balanceOf",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address[]",
+						"name": "accounts",
+						"type": "address[]"
+					},
+					{
+						"internalType": "uint256[]",
+						"name": "ids",
+						"type": "uint256[]"
+					}
+				],
+				"name": "balanceOfBatch",
+				"outputs": [
+					{
+						"internalType": "uint256[]",
+						"name": "",
+						"type": "uint256[]"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "account",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "id",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "value",
+						"type": "uint256"
+					}
+				],
+				"name": "burn",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "account",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256[]",
+						"name": "ids",
+						"type": "uint256[]"
+					},
+					{
+						"internalType": "uint256[]",
+						"name": "values",
+						"type": "uint256[]"
+					}
+				],
+				"name": "burnBatch",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "account",
+						"type": "address"
+					},
+					{
+						"internalType": "address",
+						"name": "operator",
+						"type": "address"
+					}
+				],
+				"name": "isApprovedForAll",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "operator",
+						"type": "address"
+					},
+					{
+						"internalType": "bool",
+						"name": "approved",
+						"type": "bool"
+					}
+				],
+				"name": "setApprovalForAll",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "bytes4",
+						"name": "interfaceId",
+						"type": "bytes4"
+					}
+				],
+				"name": "supportsInterface",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			}
+		],
+		"devdoc": {
+			"kind": "dev",
+			"methods": {
+				"balanceOf(address,uint256)": {
+					"details": "See {IERC1155-balanceOf}. Requirements: - `account` cannot be the zero address."
+				},
+				"balanceOfBatch(address[],uint256[])": {
+					"details": "See {IERC1155-balanceOfBatch}. Requirements: - `accounts` and `ids` must have the same length."
+				},
+				"isApprovedForAll(address,address)": {
+					"details": "See {IERC1155-isApprovedForAll}."
+				},
+				"setApprovalForAll(address,bool)": {
+					"details": "See {IERC1155-setApprovalForAll}."
+				},
+				"supportsInterface(bytes4)": {
+					"details": "See {IERC165-supportsInterface}."
+				}
+			},
+			"version": 1
+		},
+		"userdoc": {
+			"kind": "user",
+			"methods": {},
+			"version": 1
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"Dropsite.sol": "Drops"
+		},
+		"evmVersion": "london",
+		"libraries": {},
+		"metadata": {
+			"bytecodeHash": "ipfs"
+		},
+		"optimizer": {
+			"enabled": false,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"Address.sol": {
+			"keccak256": "0x319d92b11370e4d8d67b46b5e3c9440780e7ab534900dda6c4d50df6c281c67f",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://5f422b0f947eb48dc5a9ae8aaf16bdbf038dfddf3ae84af9e68b928802b83d85",
+				"dweb:/ipfs/QmZeYZ6wN1W3h4R5X3s3bj4zMrxgs3aay5fsvCLa1AaWHx"
+			]
+		},
+		"Context.sol": {
+			"keccak256": "0xb1f2346e979ad24141da4cb0466bd1ec05ad3d823e806deaf9fff9ad7ef24fb3",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://515e9c2dcf6643fdee022160ba0f3d0146db9a335ae3a5387449c724074c8515",
+				"dweb:/ipfs/QmT2hrjXKFroYhu3jtfU3Fi6n8W6mTsFsDoxgU9G7vdUo4"
+			]
+		},
+		"Dropsite.sol": {
+			"keccak256": "0x309d2a8fe0e4901d6221c7046fbe17f111cae37f77cd2de9b8faa11109bc0b99",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://ef01ac42ccdf6c7d1e7ff60deff23826c09813e853815d26d2e0b44835945770",
+				"dweb:/ipfs/QmaE2yptSzuYNSUB5Kr62Jv2MiLQpKWGtfStsrFUtBrg2R"
+			]
+		},
+		"ERC1155.sol": {
+			"keccak256": "0x31f8bc91c81a75610da8b7d241fca7fbe49d0ec717f2c9a7e4e772b176e5e99d",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://fd0f75046955c35d1f9391dea268bc26e1932953ddbac37df509a3c29b6aea13",
+				"dweb:/ipfs/QmXKeAYA11csdhiw1x8gh4fVUUAqxW5xmzfCYxHCucfL5d"
+			]
+		},
+		"ERC1155Burnable.sol": {
+			"keccak256": "0x8f0eaf8d0d8ab25da29572257231e55dadf6ade602a27f12c643eec3cac3b5d4",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://e49eb05bd8deac6529db5275052762fce41b3a26f16fe05220b27b1710885808",
+				"dweb:/ipfs/QmYGFhSJrSuasrFGVPSCNrdqePkfEfe5LSK5wRWZLfYGnW"
+			]
+		},
+		"ERC165.sol": {
+			"keccak256": "0xe751fcd285f3b8b713799541ea1e2d0b48b0198d45623dc1fc25831b56be68ef",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://34bf15989ff2a2efa214e77e2313a6ad9cbbd7e797d21bf3b212979d3309c11d",
+				"dweb:/ipfs/QmXv6148okWDDQo6y7tb3LWby2GNw7VaLxg2ZrWGzTV8iH"
+			]
+		},
+		"IERC1155.sol": {
+			"keccak256": "0xc53a8423558d8ba0c7a045817f303a44bab2b4f045c721ea87b3f5a143971946",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://351168dc79e1f501f698e70ca332a8e21919f159d95bbaffa4dddea8f96abd13",
+				"dweb:/ipfs/QmePSWuuhPVNQBhH8ggQpJNixDfTQEAaECFsGsCX6wjGe2"
+			]
+		},
+		"IERC1155Receiver.sol": {
+			"keccak256": "0x2a6bfb6eaf43d552e6c0e742847cef2713c15a0c83662fef44f0bf58288fd322",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://8761567f19649eb5b6cf1ca47cfbde2f98679816fdcc9dc3c6c218b464aec142",
+				"dweb:/ipfs/QmdEvVSSSGyHaxwZKnbFqEqyqJ7eKDpSG4FzjG5DeRCCGm"
+			]
+		},
+		"IERC165.sol": {
+			"keccak256": "0xe12b17fbc259a75f7ab3a457c41490562b33f07a3a9b86cb435f1e5ad0666c3d",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://462d3965ab38215e3400b980cda44e0178b73141d90403e305484a8ba0d7cc9e",
+				"dweb:/ipfs/QmeRJoQMh2pWgKsFzX8SkPfpvrZcuRfwXtTWA8hf8VURK9"
+			]
+		},
+		"OnyxNft1155Auctions.sol": {
+			"keccak256": "0x9ee13388664f86c6026dab541f0d9dfdaff53622081ebfe2d1e9c07c3a99b2b2",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://f10fc7133c21d37836b7abe071c161f760bfb591df625f071d3a1f820042ffbb",
+				"dweb:/ipfs/QmNhQfnLqWHkJGnvLXsFub7L1Z7pj7PDnVJfaeWu5k44n9"
+			]
+		},
+		"OnyxNft1155Royalties.sol": {
+			"keccak256": "0xeec794cb546dc7546deb5b39e4b9bf9df69d1f755cc3debf80a95762d5ec1d36",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://e9c6c906532cf1a6ef029b41d98613f12209ae0a746cf5b26d5cbd2c59546cb6",
+				"dweb:/ipfs/QmSrgHGk811mkkvYUMoH1P7Pu9BRVUsiRR8K8KsRFE79oh"
+			]
+		}
+	},
+	"version": 1
+}
