@@ -1,5 +1,6 @@
 {
-    "id":1,
+    "id":0,
     "name":"Diamond",
-    "image":"https://gateway.pinata.cloud/ipfs/QmbcBjPa7w9mg7pKJ8ZYWPoPKgWeEhfnJiX1NGcMXq3ciW/Diamond.png"
+    "image":"https://gateway.pinata.cloud/ipfs/QmbcBjPa7w9mg7pKJ8ZYWPoPKgWeEhfnJiX1NGcMXq3ciW/Diamond.png",
+    "description": "This is Diamond NFT from NFT-ES Drop."
 }

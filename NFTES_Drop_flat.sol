@@ -1,4 +1,4 @@
-//SPDX-License-Identifier: MIT
+//SPDX-License-Identifier:MIT
 pragma solidity ^0.8.0;
 
 // CAUTION
@@ -28,7 +28,7 @@ library SafeMath {
     /**
      * @dev Returns the subtraction of two unsigned integers, with an overflow flag.
      *
-     * _Available since v3.4._
+     * _Available since v3.4._one tow
      */
     function trySub(uint256 a, uint256 b) internal pure returns (bool, uint256) {
         unchecked {
@@ -1408,6 +1408,7 @@ pragma solidity ^0.8.0;
 
 
 contract NFTES_Drop is ERC1155, Ownable {
+    using SafeMath for uint;
      //NFT category
     // NFT Description & URL
     bytes data = "";
@@ -1421,10 +1422,11 @@ contract NFTES_Drop is ERC1155, Ownable {
     uint256 Silver;
 
     //Max mint Slots
-    uint256 maxDiamondCount=50;
+    uint256 maxDiamondCount=33;
     uint256 maxGoldCount=100;
-    uint256 maxSilverCount=850;
+    uint256 maxSilverCount=200;
 
+    uint256 maxMints=0;
     event isMinted(address indexed addr, string[]  ids);
     //owner-NFT-ID Mapping
     //Won NFTs w.r.t Addresses
@@ -1433,7 +1435,8 @@ contract NFTES_Drop is ERC1155, Ownable {
     }
 
     mapping(address => nft_Owner) dropsite_NFT_Owner;
-
+    
+    
     //payments Mapping  
     mapping(address => uint256) deposits;
     modifier OnlyOwner() {
@@ -1451,21 +1454,22 @@ contract NFTES_Drop is ERC1155, Ownable {
         _;
     }
 
+    modifier maxMintingIsSet() {
+        require(maxMints != 0, "Owner Should set Max Mints First");
+        _;
+    }
+
     bool public isPaused = true;
     address payable public Owner;
-    string public _name;
-    string public _symbol;
-
-    uint public constant DIAMOND_ID   = 0;
-    uint public constant GOLD_ID  = 1;
-    uint public constant SILVER_ID  = 2;
+    // string public _name;
+    // string public _symbol;
 
     mapping (uint=>string) tokenURI;
     event URI(string value, bytes indexed id);
 
     constructor()  ERC1155(""){
-        _name = name();
-        // _symbol = symbol;
+        // _name = name();
+        // // _symbol = symbol;
         Owner = payable(msg.sender);
 
         totalNFTsMinted = 0; //Total NFTs Minted
@@ -1494,7 +1498,7 @@ contract NFTES_Drop is ERC1155, Ownable {
     emit URI(_uri, _id);
   }
 
-  function getURI(uint _id) public  view returns (string memory) {
+  function uri(uint _id)  override public view returns (string memory) {
     return tokenURI[_id];
   }
 
@@ -1532,8 +1536,18 @@ contract NFTES_Drop is ERC1155, Ownable {
     }
 
     //To set Standard NFT minting Fee
-    function setMintFee(uint _mintFee) public OnlyOwner  {
+    function setMintFee(uint _mintFee) public OnlyOwner contractIsNotPaused  {
         mintFees = _mintFee;
+    }
+
+    //Set How many random NFTs can be minted in one go
+    function setMaxMints(uint _maxMints) public onlyOwner {
+        maxMints = _maxMints;
+    }
+
+    //Get How many random NFTs can be minted in one go
+    function getMaxMints() public view returns(uint) {
+        return maxMints;
     }
 
     //Get current Mint Fee
@@ -1560,7 +1574,7 @@ contract NFTES_Drop is ERC1155, Ownable {
         isPaused = false;
     }
 
-    //To WithDraw All Ammount from Contract to Owners Address or any other Address
+    //To WithDraw input Ammount from Contract to Owners Address or any other Address
     function withDraw(address payable to, uint amount) public  OnlyOwner {
         uint256 Balance = address(this).balance;
         require(amount <= Balance, "Error! Not Enough Balance");
@@ -1574,18 +1588,19 @@ contract NFTES_Drop is ERC1155, Ownable {
 
 
     //Random Number to Select an item from nums Array(Probabilities)
-    //Will return an index b/w 0-20
+    //Will return an index b/w 0-10
     function random() internal view returns (uint256) {
-        // Returns 0-20
+        // Returns 0-10
         //To Achieve maximum level of randomization!
+        //using SafeMath add function
         uint256 randomnumber = uint256(
             keccak256(
                 abi.encodePacked(
-                    ((block.timestamp) +
-                        totalNFTsMinted +
-                        Silver +
-                        Gold +
-                        Diamond),
+                    ((block.timestamp).add(
+                        totalNFTsMinted).add(
+                        Silver).add(
+                        Gold).add(
+                        Diamond)),
                     msg.sender,
                     Owner
                 )
@@ -1593,6 +1608,8 @@ contract NFTES_Drop is ERC1155, Ownable {
         );
         return randomnumber;
     }
+
+   
     //To check and update conditions wrt nftId
     function updateConditions(uint256 index)
         internal
@@ -1600,19 +1617,19 @@ contract NFTES_Drop is ERC1155, Ownable {
         returns (uint256)
     {
         uint nftId;
-        if((index) % 20 == 1 && Diamond < maxDiamondCount){
+        if((index).mod(10) == 1 && Diamond < maxDiamondCount){
             Diamond++;
             data = bytes(string(
                 abi.encodePacked("Diamond_", Strings.toString(Diamond))
             ));
             return nftId=0;
             // if nftID is 0 and Diamond is more than 50, it will go there in Gold Category
-        } else if ((index) % 20 <= 3 && Gold < maxGoldCount) {
+        } else if ((index).mod(10) <= 4 && Gold < maxGoldCount) {
             Gold++;
             data = bytes(string(abi.encodePacked("Gold_", Strings.toString(Gold))));
             return nftId=1;
             // if any of the above conditions are filled it will mint silver if enough silver available
-        } else if ((index) % 20 > 3 && Silver < maxSilverCount) {
+        } else if ((index).mod(10) > 4 && Silver < maxSilverCount) {
             Silver++;
             data = bytes(string(
                 abi.encodePacked("Silver_", Strings.toString(Silver))
@@ -1651,13 +1668,15 @@ contract NFTES_Drop is ERC1155, Ownable {
         _mint(user_addr, nftId, numOfCopies, data);
         totalNFTsMinted++;
         dropsite_NFT_Owner[user_addr].owned_Dropsite_NFTs.push(nftId);
+        if(bytes(tokenURI[nftId]).length==0)
+        {
         if(nftId==0)
-            setURI(nftId, "ipfs://QmNV7yv64ec5im7JgkL9GZyBC7wx7ZBdDLChAjfBsZ8x6Y/DiamondMetadata.json");
+            setURI(nftId, "ipfs://QmUZsQwdMBKvVrYPrErrYnzWJn7hyobCy6c9bSAU22cWwF/DiamondMetadata.json");
         else if(nftId==1)
-            setURI(nftId, "ipfs://QmNV7yv64ec5im7JgkL9GZyBC7wx7ZBdDLChAjfBsZ8x6Y/GoldMetadata.json");
+            setURI(nftId, "ipfs://QmUZsQwdMBKvVrYPrErrYnzWJn7hyobCy6c9bSAU22cWwF/GoldMetadata.json");
         else if(nftId==2)
-            setURI(nftId, "ipfs://QmNV7yv64ec5im7JgkL9GZyBC7wx7ZBdDLChAjfBsZ8x6Y/SilverMetadata.json");
-        
+            setURI(nftId, "ipfs://QmUZsQwdMBKvVrYPrErrYnzWJn7hyobCy6c9bSAU22cWwF/SilverMetadata.json");
+        }
         return (nftId, data);
     }
 
@@ -1667,15 +1686,16 @@ contract NFTES_Drop is ERC1155, Ownable {
         OnlyOwner
         contractIsNotPaused
         mintingFeeIsSet
+        maxMintingIsSet
         returns (string[] memory)
     {
-        require(noOfMints < 4 && noOfMints > 0, "You can mint 1-3 NFTs");
-        require(totalNFTsMinted < 1000, "Max Minting Limit reached");
+        require(noOfMints <= maxMints && noOfMints>0, "You cannot mint more than max mint limit");
+        require(totalNFTsMinted < 333, "Max Minting Limit reached");
         require(mintFees != 0, "Mint Fee Not Set");
         uint returnedNftID;
         bytes memory returnedNftData;
-        string[] memory randomMintedNfts = new string[](3);
-        for (uint256 i = 0; i < noOfMints; i++) {
+        string[] memory randomMintedNfts = new string[](noOfMints);
+        for (uint256 i = 0; i <= noOfMints-1; ++i) {
             (returnedNftID, returnedNftData) = randomMinting(user_addr);
               randomMintedNfts[i]= 
                     string(abi.encodePacked(Strings.toString(returnedNftID),"_", returnedNftData));
@@ -1690,26 +1710,23 @@ contract NFTES_Drop is ERC1155, Ownable {
         deposits[payee] += amountToDeposit;
     }
 
-    function checkTokenURIs(uint nft_id) internal {
-
-    }
-
     //Random minting after Crypto Payments
     function cryptoRandomMint(address user_addr, uint256 noOfMints)
         public
         payable
         contractIsNotPaused
         mintingFeeIsSet
+        maxMintingIsSet
         returns (string[] memory)
     {
-        require(noOfMints < 4 && noOfMints > 0, "You can mint 1-3 NFTs");
-        require(totalNFTsMinted < 1000, "Max Minting Limit reached");
+        require(noOfMints <= maxMints && noOfMints>0, "You cannot mint more than max mint limit");
+        require(totalNFTsMinted < 333, "Max Minting Limit reached");
         require(mintFees != 0, "Mint Fee Not Set");
-        require(msg.value == mintFees * noOfMints, "Not Enough Balance");
+        require(msg.value == mintFees.mul(noOfMints), "Not Enough Balance");
         uint returnedNftID;
         bytes memory returnedNftData;
-        string[] memory randomMintedNfts = new string[](3);
-        for (uint256 i = 0; i < noOfMints; ++i) {
+        string[] memory randomMintedNfts = new string[](noOfMints);
+        for (uint256 i = 0; i <= noOfMints-1; ++i) {
           (returnedNftID, returnedNftData) = randomMinting(user_addr);
               randomMintedNfts[i]= 
                     string(abi.encodePacked(Strings.toString(returnedNftID),"_", returnedNftData));

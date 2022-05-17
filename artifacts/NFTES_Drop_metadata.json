@@ -187,77 +187,12 @@
 			},
 			{
 				"inputs": [],
-				"name": "DIAMOND_ID",
-				"outputs": [
-					{
-						"internalType": "uint256",
-						"name": "",
-						"type": "uint256"
-					}
-				],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"inputs": [],
-				"name": "GOLD_ID",
-				"outputs": [
-					{
-						"internalType": "uint256",
-						"name": "",
-						"type": "uint256"
-					}
-				],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"inputs": [],
 				"name": "Owner",
 				"outputs": [
 					{
 						"internalType": "address payable",
 						"name": "",
 						"type": "address"
-					}
-				],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"inputs": [],
-				"name": "SILVER_ID",
-				"outputs": [
-					{
-						"internalType": "uint256",
-						"name": "",
-						"type": "uint256"
-					}
-				],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"inputs": [],
-				"name": "_name",
-				"outputs": [
-					{
-						"internalType": "string",
-						"name": "",
-						"type": "string"
-					}
-				],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"inputs": [],
-				"name": "_symbol",
-				"outputs": [
-					{
-						"internalType": "string",
-						"name": "",
-						"type": "string"
 					}
 				],
 				"stateMutability": "view",
@@ -423,7 +358,7 @@
 			},
 			{
 				"inputs": [],
-				"name": "getMintFee",
+				"name": "getMaxMints",
 				"outputs": [
 					{
 						"internalType": "uint256",
@@ -435,19 +370,13 @@
 				"type": "function"
 			},
 			{
-				"inputs": [
-					{
-						"internalType": "uint256",
-						"name": "_id",
-						"type": "uint256"
-					}
-				],
-				"name": "getURI",
+				"inputs": [],
+				"name": "getMintFee",
 				"outputs": [
 					{
-						"internalType": "string",
+						"internalType": "uint256",
 						"name": "",
-						"type": "string"
+						"type": "uint256"
 					}
 				],
 				"stateMutability": "view",
@@ -650,6 +579,19 @@
 				"inputs": [
 					{
 						"internalType": "uint256",
+						"name": "_maxMints",
+						"type": "uint256"
+					}
+				],
+				"name": "setMaxMints",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
 						"name": "_mintFee",
 						"type": "uint256"
 					}
@@ -715,7 +657,7 @@
 				"inputs": [
 					{
 						"internalType": "uint256",
-						"name": "",
+						"name": "_id",
 						"type": "uint256"
 					}
 				],
@@ -781,9 +723,6 @@
 				},
 				"transferOwnership(address)": {
 					"details": "Transfers ownership of the contract to a new account (`newOwner`). Can only be called by the current owner."
-				},
-				"uri(uint256)": {
-					"details": "See {IERC1155MetadataURI-uri}. This implementation returns the same URI for *all* token types. It relies on the token type ID substitution mechanism https://eips.ethereum.org/EIPS/eip-1155#metadata[defined in the EIP]. Clients calling this function must replace the `\\{id\\}` substring with the actual token type ID."
 				}
 			},
 			"version": 1
@@ -811,11 +750,11 @@
 	},
 	"sources": {
 		"NFTES_Drop_flat.sol": {
-			"keccak256": "0x06e2d9d7ca2cea524bcab323bc55f1553d1165ec058b397606df0cc2f5afdaa8",
+			"keccak256": "0xbab2e2a991806f4499d9937b3fde9bcd950d27ff3429f78ce793a93082acec4b",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://e965d2f47f56b64eb7d8f2ef31e5de1074a534ebdae449d7a8c5308a3be3ee3e",
-				"dweb:/ipfs/QmPwi9wd7Ld4RkYzmQLXkEXLwDAbezGxks3Cc8ye6BZAb5"
+				"bzz-raw://ab9de4118fd3a492d22a956c72ab22f088e0cfa7568669ad1d335a5d1f13ab52",
+				"dweb:/ipfs/QmQuDwdRRXy9m4meJ6CgSytLW6G9aLQFQzYR7nbKEjaZnn"
 			]
 		}
 	},
