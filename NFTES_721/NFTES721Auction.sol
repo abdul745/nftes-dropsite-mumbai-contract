@@ -4,7 +4,7 @@ pragma solidity ^0.8.0;
 // On Deployment use Specific values for Enums as Like (0,1,2,3)
 // Lock Bidder Value
 
-contract NFTES721Auction {  //is OnyxERC20 
+contract NFTES721Auction {  //is NFTESERC20 
     event availableForBids(uint, string) ;
     event removeFormSale (uint, string );
     enum status {NotOnSale ,onAuction, onBidding, OnfixedPrice }

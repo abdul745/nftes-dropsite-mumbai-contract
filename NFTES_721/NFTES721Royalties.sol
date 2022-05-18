@@ -1,16 +1,16 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 import "./ERC2981PerTokenRoyalties.sol";
-contract Onyx721Royalties{
-    // uint public OnyxFees;
-    event RoyaltiesTransfer (uint OnyxFee, uint minterFee, uint nftSellerAmount) ;
+contract NFTES721Royalties{
+    // uint public NFTESFees;
+    event RoyaltiesTransfer (uint NFTESFee, uint minterFee, uint nftSellerAmount) ;
     struct RoyaltyInfo {
         address payable recipient;
         uint24 amount;
     }
     mapping(uint256 => RoyaltyInfo) internal _royalties;
 
-    // mapping (address=>bool) OnyxWhiteList;
+    // mapping (address=>bool) NFTESWhiteList;
 
     mapping (address=>uint) _deposits;
 
@@ -42,20 +42,20 @@ contract Onyx721Royalties{
     
     /* this Function will be Called only in transfer function so its internal
     ** While Transfering a token Royalties will be deducted
-    ** 1) Get Balance in Contract   2)Deduct Onyx percentage 3) Deduct Amount for 1st Minter   
+    ** 1) Get Balance in Contract   2)Deduct NFTES percentage 3) Deduct Amount for 1st Minter   
     */
-    function _royaltyAndOnyxFee (uint _NftPrice, uint percentage, address payable minterAddress, address payable NftSeller) internal {
+    function _royaltyAndNFTESFee (uint _NftPrice, uint percentage, address payable minterAddress, address payable NftSeller) internal {
         uint _TotalNftPrice = _NftPrice;
-        uint _OnyxFee = _deductOnyxFee(_NftPrice);
+        uint _NFTESFee = _deductNFTESFee(_NftPrice);
         uint _minterFee = _SendMinterFee(_NftPrice , percentage,  minterAddress);
         //Remaining Price After Deduction  
-        _TotalNftPrice = _TotalNftPrice - _OnyxFee - _minterFee;
+        _TotalNftPrice = _TotalNftPrice - _NFTESFee - _minterFee;
         // Send Amount to NFT Seller after Tax deduction
         _transferAmountToSeller( _TotalNftPrice, NftSeller);
-        emit RoyaltiesTransfer (_OnyxFee, _minterFee, _TotalNftPrice);
+        emit RoyaltiesTransfer (_NFTESFee, _minterFee, _TotalNftPrice);
     }
     
-    function _deductOnyxFee(uint Price) internal pure returns(uint) {
+    function _deductNFTESFee(uint Price) internal pure returns(uint) {
         require((Price/10000)*10000 == Price, "Error! Too small");
         return Price*25/1000;
     }

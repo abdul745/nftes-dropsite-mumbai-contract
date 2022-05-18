@@ -7,7 +7,7 @@ import "./ERC721URIStorage.sol";
 import "./NFTES721Royalties.sol";
 import "./NFTES721Auction.sol";
 
-contract NFTES721 is ERC721, Ownable, ERC721URIStorage, Onyx721Royalties, NFTES721Auction{
+contract NFTES721 is ERC721, Ownable, ERC721URIStorage, NFTES721Royalties, NFTES721Auction{
     modifier IsApprovedOrOwner(uint nftId) {
         require (_isApprovedOrOwner(_msgSender(), nftId), "Error! Only owner has Access");
         _;
@@ -38,7 +38,7 @@ contract NFTES721 is ERC721, Ownable, ERC721URIStorage, Onyx721Royalties, NFTES7
         _setTokenRoyalty(tokenId, payable(localMinter), Percentage); // Setting Address of local minter for royalty on each transfer and Percentage what he has decided 
         //Storing NFT Price
         NFT_Price[tokenId]= msg.value;
-        _royaltyAndOnyxFee(NftPrice, Percentage, localMinter, localMinter );
+        _royaltyAndNFTESFee(NftPrice, Percentage, localMinter, localMinter );
     }
 
     function _simpleMint (uint tokenId, string memory tokenURI, uint royalityPercentage) public { // , uint NftPrice  Add Nft Price Here
@@ -75,14 +75,14 @@ contract NFTES721 is ERC721, Ownable, ERC721URIStorage, Onyx721Royalties, NFTES7
     function _SafeTransferFromNFTES(address payable from, address payable to, uint tokenId, bytes memory data) internal {
         _updateNftPrice(tokenId);
         RoyaltyInfo memory royalties = _royalties[tokenId];
-        _royaltyAndOnyxFee(NFT_Price[tokenId], royalties.amount, royalties.recipient, payable(_owners[tokenId]));
+        _royaltyAndNFTESFee(NFT_Price[tokenId], royalties.amount, royalties.recipient, payable(_owners[tokenId]));
         _safeTransfer(from, to, tokenId, data);
     }
     
     function transferFromNFTES(address payable from, address payable to, uint tokenId) payable external {
         _updateNftPrice( tokenId);
         RoyaltyInfo memory royalties = _royalties[tokenId];
-        _royaltyAndOnyxFee(NFT_Price[tokenId], royalties.amount, royalties.recipient, payable(_owners[tokenId]));
+        _royaltyAndNFTESFee(NFT_Price[tokenId], royalties.amount, royalties.recipient, payable(_owners[tokenId]));
         _transfer(from, to, tokenId);
         // NFT_Price[tokenId]=msg.value;
     }
@@ -122,7 +122,7 @@ contract NFTES721 is ERC721, Ownable, ERC721URIStorage, Onyx721Royalties, NFTES7
     function AcceptYourHighestBid (uint nftId) IsApprovedOrOwner(nftId) external  {
         _getIndexOfHighestBid(nftId);
         _deductBiddingAmount(Nft[nftId].bidAmount[Nft[nftId].index], Nft[nftId].bidderAddress[Nft[nftId].index]);   // Deduct Bidder Amount of Bidding 
-        _royaltyAndOnyxFee (Nft[nftId].bidAmount[Nft[nftId].index], _royalties[nftId].amount, _royalties[nftId].recipient, payable(ownerOf(nftId)) );
+        _royaltyAndNFTESFee (Nft[nftId].bidAmount[Nft[nftId].index], _royalties[nftId].amount, _royalties[nftId].recipient, payable(ownerOf(nftId)) );
         _transfer(_owners[nftId], Nft[nftId].bidderAddress[Nft[nftId].index], nftId);
         _setNftPrice(nftId, Nft[nftId].bidAmount[Nft[nftId].index]);
         _removeNftFromSale(nftId);
