@@ -37,7 +37,7 @@ contract NFTES1155 is ERC1155, ERC1155Burnable, NFTESErc20 ,NFTES1155Auction {
 
     bool public IsPaused = true;
     address payable public  Owner;
-    string private _name;
+    string public _name;
     
     constructor (string memory name){
         _name = name;
