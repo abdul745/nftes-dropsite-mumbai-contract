@@ -122,7 +122,7 @@ contract NFTES1155 is ERC1155, ERC1155Burnable, NFTESErc20 ,NFTES1155Auction {
     } 
     
     //Function To Switch Sale State in Bool
-    function SwitchSaleState() public OnlyOwner {
+    function switchSaleState() public OnlyOwner {
         if (IsPaused == true){
             IsPaused = false;
         }
