@@ -178,7 +178,6 @@ contract ERC1155 is Context, ERC165, IERC1155 {
         _beforeTokenTransfer(operator, address(0), to, _asSingletonArray(id), _asSingletonArray(amount), data);
         _balances[id][to] += amount;
         emit TransferSingle(operator, address(0), to, id, amount);
-
         _doSafeTransferAcceptanceCheck(operator, address(0), to, id, amount, data);
     }
 
