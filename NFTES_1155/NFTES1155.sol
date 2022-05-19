@@ -5,9 +5,9 @@ pragma solidity ^0.8.0;
 pragma experimental ABIEncoderV2;
 import "./ERC1155.sol"; 
 import "./ERC1155Burnable.sol";
-import "./OnyxNft1155Royalties.sol";
-import "./OnyxNft1155Auctions.sol";
-contract OnyxNft1155 is ERC1155, ERC1155Burnable, OnyxNftErc20 ,OnyxNft1155Auction { 
+import "./NFTES1155Royalties.sol";
+import "./NFTES1155Auctions.sol";
+contract NFTES1155 is ERC1155, ERC1155Burnable, NFTESErc20 ,NFTES1155Auction { 
 
     mapping (uint => bool) nftExists;
     mapping (uint=>string)TokenURI;
@@ -31,7 +31,7 @@ contract OnyxNft1155 is ERC1155, ERC1155Burnable, OnyxNftErc20 ,OnyxNft1155Aucti
     }
 
     modifier OnlyOwner {
-        require(_msgSender() == Owner, "OnyxNft Owner can Access");
+        require(_msgSender() == Owner, "NFTES Owner can Access");
         _;
     }
 
@@ -49,8 +49,8 @@ contract OnyxNft1155 is ERC1155, ERC1155Burnable, OnyxNftErc20 ,OnyxNft1155Aucti
     ** Want to mint his own Address direct BVlockchain
     ** TokenURI is IPFS hash and will Get from Web3
     */
-    function simpleMint (uint nftId, uint amount,  bytes memory data, string memory tokenURI, uint RoyaltyValueOfMinter ) contractIsNotPaused TokenNotExist(nftId) public {
-        _mint(_msgSender(), nftId, amount, data);
+    function simpleMint (uint nftId, uint numOfCopies,  bytes memory data, string memory tokenURI, uint RoyaltyValueOfMinter ) contractIsNotPaused TokenNotExist(nftId) public {
+        _mint(_msgSender(), nftId, numOfCopies, data);
         TokenURI[nftId] = tokenURI;
         _setTokenRoyalty(nftId, payable(_msgSender()), RoyaltyValueOfMinter);
         nftExists[nftId] = true;
@@ -59,27 +59,27 @@ contract OnyxNft1155 is ERC1155, ERC1155Burnable, OnyxNftErc20 ,OnyxNft1155Aucti
 
     // localy Minted and Want to Mint directlty on Purchaser Address
     // Will Accept Payments For NFTs 
-    // Deduct Royalties and OnyxNft Fee
+    // Deduct Royalties and NFTES Fee
     // Buyer Is Insiating Transaction himself
     // MinterAddress, RoyaltyValueOfMinter, NftPrice will get from Web3
-    function LocalMintedNfts (address to, uint id, uint amount, bytes memory data, string memory tokenURI, uint NftPrice, address payable MinterAddress, uint RoyaltyValueOfMinter) public payable{
+    function mintLazyMintedNfts (address to, uint tokenID, uint numOfCopies, bytes memory data, string memory tokenURI, uint NftPrice, address payable MinterAddress, uint RoyaltyValueOfMinter) public payable{
         require(IsPaused == false, "Contract is Paused");
-        require(msg.value>=NftPrice*amount, "Error! Insufficient Balance ");
-        _mint(to, id, amount, data);
-        TokenURI[id] = tokenURI;
-        NFT_Price[to][id]= NftPrice;
-        _setTokenRoyalty(id,MinterAddress, RoyaltyValueOfMinter);
+        require(msg.value>=NftPrice*numOfCopies, "Error! Insufficient Balance ");
+        _mint(to, tokenID, numOfCopies, data);
+        TokenURI[tokenID] = tokenURI;
+        NFT_Price[to][tokenID]= NftPrice;
+        _setTokenRoyalty(tokenID,MinterAddress, RoyaltyValueOfMinter);
         //Send Amount to Local Minter
         // Deduct Royalties
-        _royaltyAndOnyxNftFee(NftPrice*amount, RoyaltyValueOfMinter, MinterAddress, MinterAddress );
+        _royaltyAndNFTESFee(NftPrice*numOfCopies, RoyaltyValueOfMinter, MinterAddress, MinterAddress );
     }
     // Batch Minting Public Function
     // Direct minting on Blockchain 
-    function MintBatch(address to, uint[] memory ids, uint[] memory amounts, string[] memory TokenUriArr, bytes memory data, uint[] memory RoyaltyValue) external{
+    function MintBatch(address to, uint[] memory tokenIds, uint[] memory numOfCopies, string[] memory TokenUriArr, bytes memory data, uint[] memory RoyaltyValue) external{
         
         require(IsPaused == false, "Contract is Paused");
-        require(ids.length == TokenUriArr.length, "TokenURI and Token ID Length Should be Same");
-        _mintBatch(to, ids, amounts, TokenUriArr ,data, RoyaltyValue );
+        require(tokenIds.length == TokenUriArr.length, "TokenURI and Token ID Length Should be Same");
+        _mintBatch(to, tokenIds, numOfCopies, TokenUriArr ,data, RoyaltyValue );
     }
 
     //Batch Minting Direct on Blockchain Internal Function
@@ -99,12 +99,12 @@ contract OnyxNft1155 is ERC1155, ERC1155Burnable, OnyxNftErc20 ,OnyxNft1155Aucti
         _doSafeBatchTransferAcceptanceCheck(operator, address(0), to, ids, amounts, data);
     }
 
-    function IncrementInExistingTokens(address Add, uint id, uint Amount, bytes memory data) public {
+    function IncrementInExistingTokens(address minterAddress, uint nftId, uint numOfCopies, bytes memory data) public {
         //Check TokenID Already has Balance or Not
-        require(balanceOf(Add,id)>0, "Error! Use Function With URI");
+        require(balanceOf(minterAddress,nftId)>0, "Error! Use Function With URI");
         //Only Owner of that Token can Increment check owner or token Now check Approved or not
-        require(_msgSender() == Add || isApprovedForAll(Add, _msgSender()), "Only Owner and Approved Address can Increment");
-        _mint(Add, id, Amount , data);
+        require(_msgSender() == minterAddress || isApprovedForAll(minterAddress, _msgSender()), "Only Owner and Approved Address can Increment");
+        _mint(minterAddress, nftId, numOfCopies , data);
     }
 
     /*  function BuyerOfNft
@@ -113,8 +113,8 @@ contract OnyxNft1155 is ERC1155, ERC1155Burnable, OnyxNftErc20 ,OnyxNft1155Aucti
     **  Get minter Address from Struct recipient 
     **  Get NFT price
     */
-    function OnyxNftsafeTransferFrom(address from, address to, uint id, uint amount, bytes memory data ) internal {
-        _royaltyAndOnyxNftFee( ((NFT_Price[from][id])*amount), _royalties[id].amount, _royalties[id].recipient, payable(from));
+    function NFTESsafeTransferFrom(address from, address to, uint id, uint amount, bytes memory data ) internal {
+        _royaltyAndNFTESFee( ((NFT_Price[from][id])*amount), _royalties[id].amount, _royalties[id].recipient, payable(from));
         _safeTransferFrom(from, to, id, amount, data);
         delete NFT_Price[from][id];
         NFT_Price[to][id]= msg.value/amount;
@@ -153,12 +153,12 @@ contract OnyxNft1155 is ERC1155, ERC1155Burnable, OnyxNftErc20 ,OnyxNft1155Aucti
         royaltyInfo memory object = _royalties[t_id];
         return object;
     }
-    function mintForOpenBidding (uint nftId, uint amount,  bytes memory data, string memory tokenURI, uint RoyaltyValueOfMinter ) contractIsNotPaused TokenNotExist(nftId) external{
-        simpleMint (nftId,  amount,  data, tokenURI, RoyaltyValueOfMinter );
+    function mintForOpenBidding (uint nftId, uint numOfCopies,  bytes memory data, string memory tokenURI, uint RoyaltyValueOfMinter ) contractIsNotPaused TokenNotExist(nftId) external{
+        simpleMint (nftId,  numOfCopies,  data, tokenURI, RoyaltyValueOfMinter );
         _placeNftForBids(_msgSender(),nftId);
     }
-    function mintForFixedPrice (uint nftId, uint amount,  bytes memory data, string memory tokenURI, uint RoyaltyValueOfMinter, uint fixPriceOfNft ) contractIsNotPaused TokenNotExist(nftId) external{
-        simpleMint (nftId,  amount,  data, tokenURI, RoyaltyValueOfMinter );
+    function mintForFixedPrice (uint nftId, uint numOfCopies,  bytes memory data, string memory tokenURI, uint RoyaltyValueOfMinter, uint fixPriceOfNft ) contractIsNotPaused TokenNotExist(nftId) external{
+        simpleMint (nftId,  numOfCopies,  data, tokenURI, RoyaltyValueOfMinter );
         _placeNftForFixedPrice(_msgSender(), nftId , fixPriceOfNft);
         NFT_Price[_msgSender()][nftId] = fixPriceOfNft;
 
@@ -170,13 +170,13 @@ contract OnyxNft1155 is ERC1155, ERC1155Burnable, OnyxNftErc20 ,OnyxNft1155Aucti
         _placeNftForFixedPrice( _msgSender() , nftId, fixPriceOfNft );
         NFT_Price[_msgSender()][nftId] = fixPriceOfNft;
     }
-    function purchaseAgainstFixedPrice ( address from, address to, uint nftId, uint amountOfNft) external payable{
-        if (deposits[_msgSender()] < NFT_Price[from][nftId]*amountOfNft){
+    function purchaseAgainstFixedPrice ( address from, address to, uint nftId, uint numOfCopies) external payable{
+        if (deposits[_msgSender()] < NFT_Price[from][nftId]*numOfCopies){
             depositBidAmmount(_msgSender(), msg.value);
         }
-        require(NFT_Price[from][nftId]*amountOfNft <= deposits[_msgSender()] && amountOfNft > 0, "Error while Purchasing" );
-        deductAmount(_msgSender(), NFT_Price[from][nftId]*amountOfNft);
-        OnyxNftsafeTransferFrom(from,  to,  nftId, amountOfNft, "Data");
+        require(NFT_Price[from][nftId]*numOfCopies <= deposits[_msgSender()] && numOfCopies > 0, "Error while Purchasing" );
+        deductAmount(_msgSender(), NFT_Price[from][nftId]*numOfCopies);
+        NFTESsafeTransferFrom(from,  to,  nftId, numOfCopies, "Data");
     }
     function removeFromSale(uint nftId) external 
     {
@@ -194,7 +194,7 @@ contract OnyxNft1155 is ERC1155, ERC1155Burnable, OnyxNftErc20 ,OnyxNft1155Aucti
         NftDetails memory obj = Nft[_msgSender()][nftId];
         require (obj.Exists == true && deposits[obj.bidderAddress[index]]>= obj.bidAmount[index], "Error while Accepting Bids" );
         deductAmount(obj.bidderAddress[index], obj.bidAmount[index]);
-        OnyxNftsafeTransferFrom(_msgSender(), obj.bidderAddress[index], nftId,  obj.numOfCopies[index], "" ); 
+        NFTESsafeTransferFrom(_msgSender(), obj.bidderAddress[index], nftId,  obj.numOfCopies[index], "" ); 
     }
 
 }

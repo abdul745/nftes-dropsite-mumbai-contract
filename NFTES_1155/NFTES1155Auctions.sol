@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
-contract OnyxNft1155Auction {  //is SpaceERC20 
+contract NFTES1155Auction {  //is SpaceERC20 
     event availableForBids(uint, string) ;
     event removeFormSale (uint, string );
     enum status {NotOnSale ,onAuction, onBidding, OnfixedPrice }

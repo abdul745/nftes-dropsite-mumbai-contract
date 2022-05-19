@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
-contract OnyxNftErc20 {
+contract NFTESErc20 {
 
     event RoyaltiesTransfer(uint, uint, uint);
     struct royaltyInfo {
@@ -9,22 +9,22 @@ contract OnyxNftErc20 {
     }
     mapping (address => uint) deposits;
     mapping(uint256 => royaltyInfo) _royalties;
-    mapping (address=>bool) OnyxNftWhiteList;
+    mapping (address=>bool) NFTESWhiteList;
     function _setTokenRoyalty(uint256 tokenId,address payable recipient,uint256 value) internal {
         require(value <= 50, "Error! Too high Royalties");
         _royalties[tokenId] = royaltyInfo(recipient, uint24(value));
     }
 
-    function _royaltyAndOnyxNftFee (uint _NftPrice, uint percentage, address payable minterAddress, address payable NftSeller) internal  {
+    function _royaltyAndNFTESFee (uint _NftPrice, uint percentage, address payable minterAddress, address payable NftSeller) internal  {
         uint _TotalNftPrice = msg.value;                                // require(msg.value >= NftPrice[NftId], "Error! Insufficent Balance");
-        uint _OnyxNftFee = _deductOnyxNftFee(_NftPrice);
+        uint _NFTESFee = _deductNFTESFee(_NftPrice);
         uint _minterFee = _SendMinterFee(_NftPrice , percentage,  minterAddress);
-        _TotalNftPrice = _TotalNftPrice - _OnyxNftFee - _minterFee;    //Remaining Price After Deduction  
+        _TotalNftPrice = _TotalNftPrice - _NFTESFee - _minterFee;    //Remaining Price After Deduction  
         _transferAmountToSeller( _TotalNftPrice, NftSeller);            // Send Amount to NFT Seller after Tax deduction
-        emit RoyaltiesTransfer(_OnyxNftFee,_minterFee, _TotalNftPrice);
+        emit RoyaltiesTransfer(_NFTESFee,_minterFee, _TotalNftPrice);
     }
 
-    function _deductOnyxNftFee(uint Price) internal pure returns(uint) {
+    function _deductNFTESFee(uint Price) internal pure returns(uint) {
         require((Price/10000)*10000 == Price, "Error! Too small");
         return Price*25/1000;
     }
