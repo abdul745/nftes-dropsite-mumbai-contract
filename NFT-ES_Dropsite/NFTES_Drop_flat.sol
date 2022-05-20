@@ -1671,11 +1671,11 @@ contract NFTES_Drop is ERC1155, Ownable {
         if(bytes(tokenURI[nftId]).length==0)
         {
         if(nftId==0)
-            setURI(nftId, "ipfs://QmS2MSRy9j9un2GikQqadCipJE8BgwxMpr4vMTXvwxtJkq/DiamondMetadata.json");
+            setURI(nftId, "ipfs://QmNce9BpYehVxaYUnSmpXNf2p2vS1ehmV7J7DsACwWfcM3/DiamondMetadata.json");
         else if(nftId==1)
-            setURI(nftId, "ipfs://QmS2MSRy9j9un2GikQqadCipJE8BgwxMpr4vMTXvwxtJkq/GoldMetadata.json");
+            setURI(nftId, "ipfs://QmNce9BpYehVxaYUnSmpXNf2p2vS1ehmV7J7DsACwWfcM3/GoldMetadata.json");
         else if(nftId==2)
-            setURI(nftId, "ipfs://QmS2MSRy9j9un2GikQqadCipJE8BgwxMpr4vMTXvwxtJkq/SilverMetadata.json");
+            setURI(nftId, "ipfs://QmNce9BpYehVxaYUnSmpXNf2p2vS1ehmV7J7DsACwWfcM3/SilverMetadata.json");
         }
         return (nftId, data);
     }
