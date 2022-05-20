@@ -1535,6 +1535,15 @@ contract NFTES_Drop is ERC1155, Ownable {
         return (Diamond, Gold, Silver);
     }
 
+ function stopDropsite() public OnlyOwner {
+        require(isPaused == false, "Dropsite is already Stopped");
+        isPaused = true;
+    }
+
+    function openDropsite() public OnlyOwner {
+        require(isPaused == true, "Dropsite is already Running");
+        isPaused = false;
+    }
     //To set Standard NFT minting Fee
     function setMintFee(uint _mintFee) public OnlyOwner contractIsNotPaused  {
         mintFees = _mintFee;
@@ -1545,15 +1554,25 @@ contract NFTES_Drop is ERC1155, Ownable {
         maxMints = _maxMints;
     }
 
+    function setStatusMintFeeAndMaxMints(bool mintStatus, uint _mintFee, uint _maxMints) public onlyOwner {
+        mintFees = _mintFee;
+        require(_maxMints<=5,"Max Mint Set limit is 5");
+        maxMints = _maxMints;
+        if(isPaused!=mintStatus)
+        isPaused = mintStatus;
+    }
+
+    function getStatusMintFeeAndMaxMints() public view onlyOwner  returns (bool,uint,uint){
+        return (isPaused,mintFees,maxMints);
+    }
+
     //Get How many random NFTs can be minted in one go
     function getMaxMints() public view returns(uint) {
         return maxMints;
     }
 
     //Get current Mint Fee
-    function getMintFee()
-        public
-        view
+    function getMintFee() public view
         returns (uint256)
     {
         return mintFees;
@@ -1564,15 +1583,6 @@ contract NFTES_Drop is ERC1155, Ownable {
         return totalNFTsMinted;
     }
 
-    function stopDropsite() public OnlyOwner {
-        require(isPaused == false, "Dropsite is already Stopped");
-        isPaused = true;
-    }
-
-    function openDropsite() public OnlyOwner {
-        require(isPaused == true, "Dropsite is already Running");
-        isPaused = false;
-    }
 
     //To WithDraw input Ammount from Contract to Owners Address or any other Address
     function withDraw(address payable to, uint amount) public  OnlyOwner {
