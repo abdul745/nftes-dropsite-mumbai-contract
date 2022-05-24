@@ -1440,10 +1440,10 @@ contract NFTES_Drop is ERC1155, Ownable {
     
     //payments Mapping  
     mapping(address => uint256) deposits;
-    modifier OnlyOwner() {
-        require(_msgSender() == Owner, "Only NFT-ES Owner can Access");
-        _;
-    }
+    // modifier OnlyOwner() {
+    //     require(_msgSender() == Owner, "Only NFT-ES Owner can Access");
+    //     _;
+    // }
 
     //Pausing and activating the contract
     modifier contractIsNotPaused() {
@@ -1492,7 +1492,7 @@ contract NFTES_Drop is ERC1155, Ownable {
         else return false;
     }
    
-    function setURI(uint _id, string memory _uri) private onlyOwner {
+    function setURI(uint _id, string memory _uri) private  {
     tokenURI[_id] = _uri;
     emit URI(_uri, _id);
   }
@@ -1503,7 +1503,7 @@ contract NFTES_Drop is ERC1155, Ownable {
 
     function changeOwner(address newOwnerAddr)
         public
-        OnlyOwner
+        onlyOwner
         contractIsNotPaused
     {
         Owner = payable(newOwnerAddr);
@@ -1513,7 +1513,6 @@ contract NFTES_Drop is ERC1155, Ownable {
     function returnNftsOwner(address addr)
         public
         view
-        contractIsNotPaused
         returns (uint256[] memory)
     {
         return dropsite_NFT_Owner[addr].owned_Dropsite_NFTs;
@@ -1523,8 +1522,7 @@ contract NFTES_Drop is ERC1155, Ownable {
     function checkMintedCategoryWise()
         public
         view
-        OnlyOwner
-        contractIsNotPaused
+        onlyOwner
         returns (
             uint,
             uint,
@@ -1554,14 +1552,14 @@ contract NFTES_Drop is ERC1155, Ownable {
 
 
     //To WithDraw input Ammount from Contract to Owners Address or any other Address
-    function withDraw(address payable to, uint amount) public  OnlyOwner {
+    function withDraw(address payable to, uint amount) public  onlyOwner {
         uint256 Balance = address(this).balance;
         require(amount <= Balance, "Error! Not Enough Balance");
         to.transfer(amount);
     }
 
     //To Check Contract Balance in Wei
-    function contractBalance() public view OnlyOwner returns (uint256) {
+    function contractBalance() public view onlyOwner returns (uint256) {
         return address(this).balance;
     }
 
@@ -1673,7 +1671,7 @@ contract NFTES_Drop is ERC1155, Ownable {
     //Random minting after Fiat Payments
     function fiatRandomMint(address user_addr, uint256 noOfMints)
         public
-        OnlyOwner
+        onlyOwner
         contractIsNotPaused
         mintingFeeIsSet
         maxMintingIsSet
@@ -1681,7 +1679,6 @@ contract NFTES_Drop is ERC1155, Ownable {
     {
         require(noOfMints <= maxMints && noOfMints>0, "You cannot mint more than max mint limit");
         require((totalNFTsMinted+noOfMints) <= maxMintLimit, "Max Minting Limit reached");
-        require(mintFees != 0, "Mint Fee Not Set");
         uint returnedNftID;
         bytes memory returnedNftData;
         string[] memory randomMintedNfts = new string[](noOfMints);
@@ -1711,7 +1708,6 @@ contract NFTES_Drop is ERC1155, Ownable {
     {
         require(noOfMints <= maxMints && noOfMints>0, "You cannot mint more than max mint limit");
         require((totalNFTsMinted+noOfMints) <= maxMintLimit, "Max Minting Limit reached");
-        require(mintFees != 0, "Mint Fee Not Set");
         require(msg.value == mintFees.mul(noOfMints), "Not Enough Balance");
         uint returnedNftID;
         bytes memory returnedNftData;
