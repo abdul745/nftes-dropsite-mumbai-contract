@@ -1421,6 +1421,7 @@ contract NFTES_Drop is ERC1155, Ownable {
     uint256 Gold;
     uint256 Silver;
 
+    uint maxMintLimit = 333;
     //Max mint Slots
     uint256 maxDiamondCount=33;
     uint256 maxGoldCount=100;
@@ -1461,8 +1462,6 @@ contract NFTES_Drop is ERC1155, Ownable {
 
     bool public isPaused = true;
     address payable public Owner;
-    // string public _name;
-    // string public _symbol;
 
     mapping (uint=>string) tokenURI;
     event URI(string value, bytes indexed id);
@@ -1474,7 +1473,7 @@ contract NFTES_Drop is ERC1155, Ownable {
 
         totalNFTsMinted = 0; //Total NFTs Minted
         numOfCopies = 1; //A user can mint only 1 NFT in one call
-
+        
         //Initially 0 NFTs have been minted
         Diamond = 0;
         Gold = 0;
@@ -1535,24 +1534,6 @@ contract NFTES_Drop is ERC1155, Ownable {
         return (Diamond, Gold, Silver);
     }
 
- function stopDropsite() public OnlyOwner {
-        require(isPaused == false, "Dropsite is already Stopped");
-        isPaused = true;
-    }
-
-    function openDropsite() public OnlyOwner {
-        require(isPaused == true, "Dropsite is already Running");
-        isPaused = false;
-    }
-    //To set Standard NFT minting Fee
-    function setMintFee(uint _mintFee) public OnlyOwner contractIsNotPaused  {
-        mintFees = _mintFee;
-    }
-
-    //Set How many random NFTs can be minted in one go
-    function setMaxMints(uint _maxMints) public onlyOwner {
-        maxMints = _maxMints;
-    }
 
     function setStatusMintFeeAndMaxMints(bool mintStatus, uint _mintFee, uint _maxMints) public onlyOwner {
         mintFees = _mintFee;
@@ -1564,18 +1545,6 @@ contract NFTES_Drop is ERC1155, Ownable {
 
     function getStatusMintFeeAndMaxMints() public view onlyOwner  returns (bool,uint,uint){
         return (isPaused,mintFees,maxMints);
-    }
-
-    //Get How many random NFTs can be minted in one go
-    function getMaxMints() public view returns(uint) {
-        return maxMints;
-    }
-
-    //Get current Mint Fee
-    function getMintFee() public view
-        returns (uint256)
-    {
-        return mintFees;
     }
 
     //To Check total Minted NFTs
@@ -1633,7 +1602,7 @@ contract NFTES_Drop is ERC1155, Ownable {
                 abi.encodePacked("Diamond_", Strings.toString(Diamond))
             ));
             return nftId=0;
-            // if nftID is 0 and Diamond is more than 50, it will go there in Gold Category
+            // if nftID is 0 and Diamond is more than 33, it will go there in Gold Category
         } else if ((index).mod(10) <= 4 && Gold < maxGoldCount) {
             Gold++;
             data = bytes(string(abi.encodePacked("Gold_", Strings.toString(Gold))));
@@ -1649,14 +1618,23 @@ contract NFTES_Drop is ERC1155, Ownable {
 
             //if nft ID is either 1 or 2, but Slots in Gold or Diamond are remaining,
             //First Gold category will be filled then Diamond
-            if (Gold < maxGoldCount) {
+            if (Silver < maxSilverCount) {
+                nftId = 1;
+                Silver++;
+                data = bytes(string(
+                    abi.encodePacked("Silver_", Strings.toString(Gold))
+                ));
+                return nftId;
+            }
+
+            else if (Gold < maxGoldCount) {
                 nftId = 1;
                 Gold++;
                 data = bytes(string(
                     abi.encodePacked("Gold_", Strings.toString(Gold))
                 ));
                 return nftId;
-            } else {
+            }  else if (Diamond < maxDiamondCount){
                 nftId = 0;
                 Diamond++;
                 data = bytes(string(
@@ -1664,7 +1642,9 @@ contract NFTES_Drop is ERC1155, Ownable {
                 ));
                 return nftId;
             }
+            else return 99;
         }
+        
     }
 
     function randomMinting(address user_addr)
@@ -1700,7 +1680,7 @@ contract NFTES_Drop is ERC1155, Ownable {
         returns (string[] memory)
     {
         require(noOfMints <= maxMints && noOfMints>0, "You cannot mint more than max mint limit");
-        require(totalNFTsMinted < 333, "Max Minting Limit reached");
+        require((totalNFTsMinted+noOfMints) <= maxMintLimit, "Max Minting Limit reached");
         require(mintFees != 0, "Mint Fee Not Set");
         uint returnedNftID;
         bytes memory returnedNftData;
@@ -1730,7 +1710,7 @@ contract NFTES_Drop is ERC1155, Ownable {
         returns (string[] memory)
     {
         require(noOfMints <= maxMints && noOfMints>0, "You cannot mint more than max mint limit");
-        require(totalNFTsMinted < 333, "Max Minting Limit reached");
+        require((totalNFTsMinted+noOfMints) <= maxMintLimit, "Max Minting Limit reached");
         require(mintFees != 0, "Mint Fee Not Set");
         require(msg.value == mintFees.mul(noOfMints), "Not Enough Balance");
         uint returnedNftID;
