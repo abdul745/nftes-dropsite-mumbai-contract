@@ -38,10 +38,6 @@ contract NFTES_Drop is ERC1155, Ownable {
     
     //payments Mapping  
     mapping(address => uint256) deposits;
-    // modifier OnlyOwner() {
-    //     require(_msgSender() == Owner, "Only NFT-ES Owner can Access");
-    //     _;
-    // }
 
     //Pausing and activating the contract
     modifier contractIsNotPaused() {
@@ -65,8 +61,6 @@ contract NFTES_Drop is ERC1155, Ownable {
     event URI(string value, bytes indexed id);
 
     constructor()  ERC1155(""){
-        // _name = name();
-        // // _symbol = symbol;
         Owner = payable(msg.sender);
 
         totalNFTsMinted = 0; //Total NFTs Minted
@@ -79,11 +73,11 @@ contract NFTES_Drop is ERC1155, Ownable {
     }
 
     function name() public pure returns(string memory){
-    return "NFT-ES Drop";
+    return "#001 Embajadores NFTes";
    }
 
     function symbol() public pure returns(string memory){
-        return "NED";
+        return "NFT-ES";
     }
     function isAdmin() public view returns (bool){
         if(msg.sender==Owner) return true;
@@ -257,11 +251,11 @@ contract NFTES_Drop is ERC1155, Ownable {
         if(bytes(tokenURI[nftId]).length==0)
         {
         if(nftId==0)
-            setURI(nftId, "ipfs://QmNce9BpYehVxaYUnSmpXNf2p2vS1ehmV7J7DsACwWfcM3/DiamondMetadata.json");
+            setURI(nftId, "ipfs://QmY9P8CgCdtkeDZUbzZfrqXvhmZPPeaN9eAxvk3a4BG4b2/DiamondMetadata.json");
         else if(nftId==1)
-            setURI(nftId, "ipfs://QmNce9BpYehVxaYUnSmpXNf2p2vS1ehmV7J7DsACwWfcM3/GoldMetadata.json");
+            setURI(nftId, "ipfs://QmY9P8CgCdtkeDZUbzZfrqXvhmZPPeaN9eAxvk3a4BG4b2/GoldMetadata.json");
         else if(nftId==2)
-            setURI(nftId, "ipfs://QmNce9BpYehVxaYUnSmpXNf2p2vS1ehmV7J7DsACwWfcM3/SilverMetadata.json");
+            setURI(nftId, "ipfs://QmY9P8CgCdtkeDZUbzZfrqXvhmZPPeaN9eAxvk3a4BG4b2/SilverMetadata.json");
         }
         return (nftId, data);
     }
